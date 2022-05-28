@@ -1,7 +1,14 @@
 import { test, expect } from '@playwright/test';
+import CartPage from '../pages/cart.page';
 const path = require('path');
 
 test.describe('Upload', () => {
+  let cartPage: CartPage
+
+  test.beforeEach(async ({ page }) => {
+    cartPage = new CartPage(page)
+  })
+
   test('Upload file', async ({ page }) => {
     // Open url
     await page.goto("https://practice.automationbro.com/cart/");
@@ -9,20 +16,11 @@ test.describe('Upload', () => {
     // store test file path
     const filePath = path.join(__dirname, '../data/3mb-file.pdf');
 
-    // upload test file
-    await page.setInputFiles('input#upfile_1', filePath);
-
-    // click the submit button
-    await page.locator('#upload_1').click();
-
-    // wait 5 sec
-    // await page.waitForTimeout(5000)
-
-    // wait for element
-    // await page.locator('#wfu_messageblock_header_1_label_1').waitFor({ state: 'visible', timeout: 10000 })
+    // upload file
+    cartPage.uploadComp().uploadFile(filePath)
 
     // assertion
-    await expect(page.locator('#wfu_messageblock_header_1_label_1')).toContainText('uploaded successfully', { timeout: 10000 });
+    await expect(cartPage.uploadComp().successTxt).toContainText('uploaded successfully', { timeout: 10000 });
   })
 
   test('Upload file on a hidden input', async ({ page }) => {
