@@ -9,21 +9,26 @@ test.describe('Upload', () => {
     cartPage = new CartPage(page)
   })
 
-  test('Upload file', async ({ page }) => {
-    // Open url
-    await page.goto("https://practice.automationbro.com/cart/");
+  const fileName = ['logotitle.png', '3mb-file.pdf']
 
-    // store test file path
-    const filePath = path.join(__dirname, '../data/3mb-file.pdf');
+  for (const name of fileName) {
+    test(`Upload file with ${name}`, async ({ page }) => {
+      // Open url
+      await page.goto("/cart/");
 
-    // upload file
-    cartPage.uploadComp().uploadFile(filePath)
+      // store test file path
+      const filePath = path.join(__dirname, `../data/${name}`);
 
-    // assertion
-    await expect(cartPage.uploadComp().successTxt).toContainText('uploaded successfully', { timeout: 10000 });
-  })
+      // upload file
+      cartPage.uploadComp().uploadFile(filePath)
 
-  test('Upload file on a hidden input', async ({ page }) => {
+      // assertion
+      await expect(cartPage.uploadComp().successTxt).toContainText('uploaded successfully', { timeout: 10000 });
+    })
+  }
+
+
+  test.skip('Upload file on a hidden input', async ({ page }) => {
     // Open url
     await page.goto("https://practice.automationbro.com/cart/");
 
