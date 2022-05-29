@@ -8,18 +8,18 @@ test.describe('Home', () => {
     homePage = new HomePage(page)
   })
 
-  test('Open HomePage and verify title', async ({ page }) => {
+  test('Open HomePage and verify title @smoke', async ({ page }) => {
     await homePage.navigate()
     await expect(page, "Title didn't match").toHaveTitle("Practice E-Commerce Site – Automation Bro")
   });
 
-  test('Click get started btn using CSS Selector', async ({ page }) => {
+  test('Click get started btn using CSS Selector @regression', async ({ page }) => {
     await homePage.navigate()
     await homePage.getStartedBtn.click()
     await expect(page).toHaveURL(/.*get-started/);
   });
 
-  test('Verify heading text is visible using text selector', async ({ page }) => {
+  test('Verify heading text is visible using text selector @smoke', async ({ page }) => {
     await homePage.navigate()
     await expect(homePage.headingText).toBeVisible()
   });
