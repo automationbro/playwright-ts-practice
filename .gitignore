@@ -6,3 +6,4 @@ loggedInState.json
 notsignedin.json
 allure*
 .DS_Store
+*.log

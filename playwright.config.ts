@@ -33,6 +33,8 @@ const config: PlaywrightTestConfig = {
   reporter: [['html', { open: 'never' }], ['list'], ["allure-playwright"]],
 
   globalSetup: require.resolve('./utils/global-setup'),
+  globalTeardown: require.resolve('./utils/global-teardown'),
+
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
@@ -48,12 +50,27 @@ const config: PlaywrightTestConfig = {
 
   /* Configure projects for major browsers */
   projects: [
+    // -- BrowserStack Projects --
+    // name should be of the format browser@browser_version:os os_version@browserstack
+    // {
+    //   name: 'chrome@latest:Windows 10@browserstack',
+    //   use: {
+    //     browserName: 'chromium',
+    //     channel: 'chrome'
+    //   },
+    // },
     {
-      name: 'chromium',
+      name: 'playwright-webkit@latest:OSX Big Sur@browserstack',
       use: {
-        ...devices['Desktop Chrome'],
+        browserName: 'webkit',
       },
     },
+    // {
+    //   name: 'chromium',
+    //   use: {
+    //     ...devices['Desktop Chrome'],
+    //   },
+    // },
 
     // {
     //   name: 'firefox',

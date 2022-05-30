@@ -1,4 +1,5 @@
-import { test, expect } from '@playwright/test';
+const { test } = require('../fixtures');
+import { expect } from '@playwright/test';
 import HomePage from '../pages/home.page';
 
 test.describe('Home', () => {
