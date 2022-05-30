@@ -21,7 +21,7 @@ test.describe('Home', () => {
 
   test('Verify heading text is visible using text selector @smoke', async ({ page }) => {
     await homePage.navigate()
-    await expect(homePage.headingText).toBeVisible()
+    await expect(homePage.headingText).not.toBeVisible()
   });
 
   test('Verify home link is enabled using text and css selector', async ({ page }) => {
