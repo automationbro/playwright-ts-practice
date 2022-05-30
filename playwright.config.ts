@@ -30,7 +30,7 @@ const config: PlaywrightTestConfig = {
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['html', { open: 'never' }]],
+  reporter: [['html', { open: 'never' }], ['list'], ["allure-playwright"]],
 
   globalSetup: require.resolve('./utils/global-setup'),
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -43,7 +43,7 @@ const config: PlaywrightTestConfig = {
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'retain-on-failure',
 
-    storageState: 'storageState.json'
+    storageState: 'loggedInState.json',
   },
 
   /* Configure projects for major browsers */
